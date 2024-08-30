@@ -27,9 +27,9 @@
                           </select>
                         </div>
                       </div>
-                      <div class="card-body" style="text-align: center;">
+                      <div class="card-body">
                         <div id="map"></div>
-                        <div id="detail"></div>
+                        <div id="detail" style="text-align: justify;"></div>
                       </div>
                    	</div>
                 </div>

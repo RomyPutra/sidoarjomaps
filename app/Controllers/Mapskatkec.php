@@ -5,14 +5,16 @@ use Config\Services;
 use App\Models\Tlokasi_model;
 use App\Models\Tvillages_model;
 use App\Models\Tdistricts_model;
+use App\Models\Tkategori_model;
 
-class Mapsvillages extends BaseController
+class Mapskatkec extends BaseController
 {
     protected $helper = [];
     protected $validation;
     protected $main_model;
     protected $villages_model;
     protected $districts_model;
+    protected $kategori_model;
 
     public function __construct()
     {
@@ -20,19 +22,20 @@ class Mapsvillages extends BaseController
         $this->main_model = new Tlokasi_model();
         $this->villages_model = new Tvillages_model();
         $this->districts_model = new Tdistricts_model();
+        $this->kategori_model = new Tkategori_model();
 	}
     
     public function index()
     {
+        $data['kategori'] = $this->kategori_model->getJoin();
         $data['villages'] = $this->districts_model->getData();
-        // $data['villages'] = $this->villages_model->getData();
 
-        $data['subview'] = 'mapskecamatan/index';
-        $data['jscript'] = 'mapskecamatan/js';
+        $data['subview'] = 'mapskatkec/index';
+        $data['jscript'] = 'mapskatkec/js';
         return view('main_layout', $data);
     }
  
-    public function ajaxmapskec()
+    public function ajaxkatkec()
     {
         $request = Services::request();
         if ($request->getMethod(true) === 'POST') {
@@ -66,14 +69,16 @@ class Mapsvillages extends BaseController
         }
     }
 
-    public function kecchanges($id)
+    public function dropchanges($idkat, $idkec)
     {
         $request = Services::request();
         if ($request->getMethod(true) === 'POST') {
             $csrfName = csrf_token();
             $csrfHash = csrf_hash();
 
-            $records = $id == 0 ? $this->main_model->getPointMaps() : $this->main_model->getMapsbyvillages($id);
+            $records = $idkat == 0 && $idkec == 0 ? $this->main_model->getPointMaps() : 
+            ($idkat == 0 && $idkec != 0 ? $this->main_model->getMapsbyvillages($idkec) : 
+            ($idkat != 0 && $idkec == 0 ? $this->main_model->getMapsbykategori($idkat) : $this->main_model->getMapsbykatkec($idkat,$idkec)));
             // log_message('info', 'kecchanges: '.$this->db->getLastQuery());
             // log_message('info', 'kecchanges: '.print_r($records, TRUE));
             $data = [];
@@ -98,19 +103,19 @@ class Mapsvillages extends BaseController
             $output = [
                 'data' => $data
             ];
-            $output['deslat'] = $id == 0 || count($records) < 1 ? '-7.4547306' : $records[0]->deslat;
-            $output['deslng'] = $id == 0 || count($records) < 1 ? '112.6059371' : $records[0]->deslng;
-            $output['totall'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->totall) ? '-' : $records[0]->totall);
-            $output['totalp'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->totalp) ? '-' : $records[0]->totalp);
-            $output['totala'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->totala) ? '-' : $records[0]->totala);
-            $output['luaswil'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->luaswil) ? '-' : $records[0]->luaswil);
-            $output['btsutara'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->btsutara) ? '-' : $records[0]->btsutara);
-            $output['btsbarat'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->btsbarat) ? '-' : $records[0]->btsbarat);
-            $output['btsselatan'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->btsselatan) ? '-' : $records[0]->btsselatan);
-            $output['btstimur'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->btstimur) ? '-' : $records[0]->btstimur);
-            $output['thndata'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->thndata) ? '-' : $records[0]->thndata);
-            $output['kecamatan'] = $id == 0 || count($records) < 1 ? '-' : (empty($records[0]->name) ? '-' : $records[0]->name);
-            $output['counter'] = $this->main_model->getMapskatvillages($id);
+            $output['deslat'] = $idkec == 0 || count($records) < 1 ? '-7.4547306' : $records[0]->deslat;
+            $output['deslng'] = $idkec == 0 || count($records) < 1 ? '112.6059371' : $records[0]->deslng;
+            $output['totall'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->totall) ? '-' : $records[0]->totall);
+            $output['totalp'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->totalp) ? '-' : $records[0]->totalp);
+            $output['totala'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->totala) ? '-' : $records[0]->totala);
+            $output['luaswil'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->luaswil) ? '-' : $records[0]->luaswil);
+            $output['btsutara'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->btsutara) ? '-' : $records[0]->btsutara);
+            $output['btsbarat'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->btsbarat) ? '-' : $records[0]->btsbarat);
+            $output['btsselatan'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->btsselatan) ? '-' : $records[0]->btsselatan);
+            $output['btstimur'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->btstimur) ? '-' : $records[0]->btstimur);
+            $output['thndata'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->thndata) ? '-' : $records[0]->thndata);
+            $output['kecamatan'] = $idkec == 0 || count($records) < 1 ? '-' : (empty($records[0]->name) ? '-' : $records[0]->name);
+            $output['counter'] = $this->main_model->getMapskatvillages($idkec);
             // log_message('info', 'kecchangescounter: '.$this->db->getLastQuery());
             // log_message('info', 'kecchangescounter: '.print_r($counter, TRUE));
 

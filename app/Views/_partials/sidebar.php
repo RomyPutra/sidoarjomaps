@@ -79,6 +79,12 @@
                         <p>Kecamatan</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url('mapskatkec');?>" class="nav-link">
+                        <i class="fa fa-book nav-icon"></i>
+                        <p>Kategori per Kecamatan</p>
+                    </a>
+                </li>
                 <li class="nav-header"></li>
                 <li class="nav-item">
                 </li>

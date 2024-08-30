@@ -103,17 +103,18 @@ $routes->get('obyek/delete/(:num)', 'Lokasi::delitem/$1', ['filter' => 'authGuar
 $routes->get('mapskategori', 'Mapskategori::index');
 $routes->post('ajaxmapskat', 'Mapskategori::ajaxmapskat');
 $routes->post('mapskategori/(:num)', 'Mapskategori::katchanges/$1');
-$routes->get('mapskategori/detail/(:any)', 'Mapskategori::detail/$1');
 
 $routes->get('mapskecamatan', 'Mapsvillages::index');
 $routes->post('ajaxmapskec', 'Mapsvillages::ajaxmapskec');
 $routes->post('mapskecamatan/(:num)', 'Mapsvillages::kecchanges/$1');
-$routes->get('mapskecamatan/detail/(:any)', 'Mapsvillages::detail/$1');
 
 $routes->get('mapsobject', 'Mapsobject::index');
 $routes->post('ajaxmapsobj', 'Mapsobject::ajaxmapsobj');
 $routes->post('mapsobject/(:any)', 'Mapsobject::searchobj/$1');
-$routes->get('mapsobject/detail/(:any)', 'Mapsobject::detail/$1');
+
+$routes->get('mapskatkec', 'Mapskatkec::index');
+$routes->post('ajaxkatkec', 'Mapskatkec::ajaxkatkec');
+$routes->post('mapskatkec/(:num)/(:num)', 'Mapskatkec::dropchanges/$1/$2');
 
 /*
  * --------------------------------------------------------------------

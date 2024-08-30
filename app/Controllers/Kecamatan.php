@@ -93,6 +93,10 @@ class Kecamatan extends BaseController
                 'totalp'        => $datakecamatan[0]->totalp,
                 'luaswil'       => $datakecamatan[0]->luaswil,
                 'thndata'       => $datakecamatan[0]->thndata,
+                'btsutara'      => $datakecamatan[0]->btsutara,
+                'btstimur'      => $datakecamatan[0]->btstimur,
+                'btsselatan'    => $datakecamatan[0]->btsselatan,
+                'btsbarat'      => $datakecamatan[0]->btsbarat,
             );
             $data['kabupaten'] = $this->regencies_model->getData();
         }
@@ -147,6 +151,10 @@ class Kecamatan extends BaseController
                 'totalp'        => $this->request->getPost('totalp'),
                 'luaswil'       => $this->request->getPost('luaswil'),
                 'thndata'       => $this->request->getPost('thndata'),
+                'btsutara'      => $this->request->getPost('btsutara'),
+                'btstimur'      => $this->request->getPost('btstimur'),
+                'btsselatan'    => $this->request->getPost('btsselatan'),
+                'btsbarat'      => $this->request->getPost('btsbarat'),
             );
             $this->main_model->insertData($datakecamatan);
         }
@@ -162,6 +170,10 @@ class Kecamatan extends BaseController
                 'totalp'        => $this->request->getPost('totalp'),
                 'luaswil'       => $this->request->getPost('luaswil'),
                 'thndata'       => $this->request->getPost('thndata'),
+                'btsutara'      => $this->request->getPost('btsutara'),
+                'btstimur'      => $this->request->getPost('btstimur'),
+                'btsselatan'    => $this->request->getPost('btsselatan'),
+                'btsbarat'      => $this->request->getPost('btsbarat'),
             );
             $this->main_model->updateData($datakecamatan, $this->request->getPost('id'));
         }

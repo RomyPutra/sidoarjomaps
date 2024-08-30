@@ -98,22 +98,4 @@ class Mapskategori extends BaseController
         }
     }
 
-    public function detail($id)
-    {
-        if ($id)
-        {
-            $data['tempat'] = $this->main_model->getPointbyid($id);
-            $data['dtltempat'] = $this->main_model->getPointDetails($id);
-
-            $data['subview'] = 'mapskategori/detail';
-            $data['jscript'] = 'mapskategori/js';
-        }
-        else
-        {
-            $data['subview'] = 'mapskategori/index';
-            $data['jscript'] = 'mapskategori/js';
-        }
-        return view('main_layout', $data);
-    }
-
 }

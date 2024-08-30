@@ -25,7 +25,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="card-body" style="text-align: center;">
+                      <div class="card-body">
                         <div id="map"></div>
                       </div>
                    	</div>

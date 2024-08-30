@@ -51,8 +51,8 @@ class Lokasi extends BaseController
                     $record->nama,
                     $record->kategori,
                     $record->alt_name,
-                    $record->gambar ? '<img src="'.base_url('public/imgmain/').$record->gambar.'"/>' : '-',
-                    $record->profile,
+                    $record->gambar ? '<img src="'.base_url('public/imgmain/').$record->gambar.'" style="max-width: 300px;max-height: 300px;" />' : '-',
+                    strlen($record->profile) > 100 ? substr($record->profile, 0, strrpos(substr($record->profile, 0, 100), ' ')) . '...' : $record->profile,
                     $record->latitude,
                     $record->longitude,
                     '<a href="'.base_url('obyek/input/'.$record->kode).'" id="edit" class="btn custom-button btn-sm" title="Edit"><i class="fa fa-pen"></i></a>&nbsp;<a href="'.base_url('obyek/detail/'.$record->kode).'" id="view" class="btn custom-button btn-sm" title="Detail"><i class="fa fa-eye"></i></a>',
@@ -270,7 +270,7 @@ class Lokasi extends BaseController
                 $data[] = array( 
                     $no,
                     $record->nama.' '.$record->alt_name,
-                    $record->dtlimages ? '<img src="'.base_url('public/imgdtl/').$record->dtlimages.'"/>' : '-',
+                    $record->dtlimages ? '<img src="'.base_url('public/imgdtl/').$record->dtlimages.'" style="max-width: 300px;max-height: 300px;" />' : '-',
                     '<a href="'.base_url('obyek/inputdtl/'.$id.'/'.$record->kode).'" id="edit" class="btn custom-button btn-sm" title="Edit"><i class="fa fa-pen"></i></a>&nbsp;<a onclick="return confirm(\'Apakah Anda Yakin?\')" href="'.base_url('obyek/delete/'.$record->kode).'" id="delete" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>',
                 ); 
             }

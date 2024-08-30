@@ -181,6 +181,24 @@
             white-space: nowrap;
         }
     }
+
+    .card-success:not(.card-outline)>.card-header {
+        background-color: #6EACDA !important;
+    }
+    
+    .katkec {
+        display: inline-flex;
+    }
+
+    .katkec .form-group {
+        margin: 2px;
+    }
+
+    @media only screen and (max-width: 767px) and (orientation: portrait) {
+        .katkec {
+            display: block;
+        }
+    }
     </style>
 </head>
 <body class="hold-transition sidebar-mini">

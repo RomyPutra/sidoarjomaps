@@ -11,6 +11,10 @@
 							<div class="card-body" style="display: contents;">
 								<div style="margin: 10px;">
 									<h3><?php echo $tempat[0]->nama;?></h3>
+									<h4>Alamat: <?php echo $tempat[0]->alamat;?></h4>
+									<h4><?php echo $tempat[0]->alt_name;?></h4>
+									<h4>Pengurus: <?php echo $tempat[0]->namacp;?></h4>
+									<h4>Nomor Pengurus: <?php echo $tempat[0]->nomorcp;?></h4>
 									<?php if (isset($tempat[0]->gambar) && $tempat[0]->gambar != '') {;?>
 										<img src="<?php echo base_url('public/imgmain/').$tempat[0]->gambar;?>" class="card-img-top" alt="<?php echo $tempat[0]->nama;?>" style="width: 150px; height: 150px;margin-right:15px;margin-bottom: :15px;float: right;">
 									<?php } else {;?>

@@ -52,6 +52,20 @@
       }
     });
 
+    $('#totalp').keyup(function(){
+      var totall = $('#totall').val().length <= 0 ? 0 : parseInt($('#totall').val());
+      var totalp = $('#totalp').val().length <= 0 ? 0 : parseInt($('#totalp').val());
+      var totala = totall + totalp;
+      $('#totala').val(totala);
+    });
+
+    $('#totall').keyup(function(){
+      var totall = $('#totall').val().length <= 0 ? 0 : parseInt($('#totall').val());
+      var totalp = $('#totalp').val().length <= 0 ? 0 : parseInt($('#totalp').val());
+      var totala = totall + totalp;
+      $('#totala').val(totala);
+    });
+
   });
 
 </script>

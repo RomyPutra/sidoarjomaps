@@ -11,6 +11,10 @@
 							<div class="card-body" style="display: contents;">
 								<div style="margin: 10px;">
 									<h3><?php echo $tempat[0]->nama;?></h3>
+									<h4>Alamat: <?php echo $tempat[0]->alamat;?></h4>
+									<h4><?php echo $tempat[0]->alt_name;?></h4>
+									<h4>Pengurus: <?php echo $tempat[0]->namacp;?></h4>
+									<h4>Nomor Pengurus: <?php echo $tempat[0]->nomorcp;?></h4>
 									<?php if (strlen($tempat[0]->profile) > 250) { ?>
 										<p style="text-align: justify;"><?php echo substr($tempat[0]->profile, 0, 250);?></p>
 										<div style="text-align: center;">

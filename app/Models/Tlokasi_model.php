@@ -89,7 +89,7 @@ class Tlokasi_model extends Model
 
     public function getMapsbykategori($id=0)
     {
-        $scol = array('tbtempat.kode','tbtempat.kd_kat','tbkategori.kategori','tbkategori.images','tbtempat.kd_desa','districts.alt_name','tbtempat.nama','tbtempat.images AS gambar','tbtempat.profile','tbtempat.latitude','tbtempat.longitude','tbtempat.alamat','tbtempat.namacp','tbtempat.nomorcp','tbtempat.template','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata','tbtempat.created_at','tbtempat.updated_at','districts.name');
+        $scol = array('tbtempat.kode','tbtempat.kd_kat','tbkategori.kategori','tbkategori.images','tbtempat.kd_desa','districts.alt_name','tbtempat.nama','tbtempat.images AS gambar','tbtempat.profile','tbtempat.latitude','tbtempat.longitude','tbtempat.created_at','tbtempat.updated_at','districts.latitude as deslat','districts.longitude as deslng','tbtempat.alamat','tbtempat.namacp','tbtempat.nomorcp','tbtempat.template','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata','districts.name');
         $this->dt->select($scol);
         $this->dt->join('tbkategori', 'tbkategori.kode = tbtempat.kd_kat', 'left');;
         $this->dt->join('villages', 'villages.id = tbtempat.kd_desa', 'left');;
@@ -109,6 +109,20 @@ class Tlokasi_model extends Model
         $this->dt->join('districts', 'districts.id = villages.district_id', 'left');;
         // $this->dt->where('tbtempat.kd_desa', $id);
         $this->dt->where('districts.id', $id);
+
+        $query = $this->dt->get();
+        return $query->getResult();
+    }
+
+    public function getMapsbykatkec($idkat=0,$idkec=0)
+    {
+        $scol = array('tbtempat.kode','tbtempat.kd_kat','tbkategori.kategori','tbkategori.images','tbtempat.kd_desa','districts.alt_name','tbtempat.nama','tbtempat.images AS gambar','tbtempat.profile','tbtempat.latitude','tbtempat.longitude','tbtempat.created_at','tbtempat.updated_at','districts.latitude as deslat','districts.longitude as deslng','tbtempat.alamat','tbtempat.namacp','tbtempat.nomorcp','tbtempat.template','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata','districts.name');
+        $this->dt->select($scol);
+        $this->dt->join('tbkategori', 'tbkategori.kode = tbtempat.kd_kat', 'left');;
+        $this->dt->join('villages', 'villages.id = tbtempat.kd_desa', 'left');;
+        $this->dt->join('districts', 'districts.id = villages.district_id', 'left');;
+        $this->dt->where('tbtempat.kd_kat', $idkat);
+        $this->dt->where('districts.id', $idkec);
 
         $query = $this->dt->get();
         return $query->getResult();
@@ -190,12 +204,13 @@ class Tlokasi_model extends Model
 
         $i = 0;
         foreach ($scol as $item) {
+            $alias = strpos($item, ' AS ') ? explode(' AS ', $item)[0] : $item;
             if ($postData->getPost('search')['value']) {
                 if ($i === 0) {
                     $this->dt->groupStart();
-                    $this->dt->like($item, $postData->getPost('search')['value']);
+                    $this->dt->like($alias, $postData->getPost('search')['value']);
                 } else {
-                    $this->dt->orLike($item, $postData->getPost('search')['value']);
+                    $this->dt->orLike($alias, $postData->getPost('search')['value']);
                 }
                 if (count($scol) - 1 == $i)
                     $this->dt->groupEnd();
