@@ -52,7 +52,7 @@ class Tdistricts_model extends Model
 
     public function getDatabyid($id)
     {
-        $scol = array('districts.id','regencies.province_id','provinces.name AS province','districts.regency_id','regencies.name AS regency','districts.name','districts.alt_name','districts.latitude','districts.longitude','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata');
+        $scol = array('districts.id','regencies.province_id','provinces.name AS province','districts.regency_id','regencies.name AS regency','districts.name','districts.alt_name','districts.latitude','districts.longitude','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata','districts.bumdes','districts.tbsekolah','districts.btsd','districts.sd','districts.smp','districts.sma','districts.profesi','districts.diploma','districts.sarjana','districts.magister','districts.doctoral','districts.btkerja','districts.asn','districts.pengajar','districts.wiraswasta','districts.petani','districts.nelayan','districts.pemukaagama','districts.pelajar','districts.nakes','districts.pensiun','districts.lainnya');
         $this->dt->select($scol);
         $this->dt->join('regencies', 'regencies.id = districts.regency_id', 'left');;
         $this->dt->join('provinces', 'provinces.id = regencies.province_id', 'left');;
@@ -75,7 +75,7 @@ class Tdistricts_model extends Model
 
     private function getDatatablesQuery($postData=null)
     {
-        $scol = array('districts.id','regencies.province_id','provinces.name AS province','districts.regency_id','regencies.name AS regency','districts.name','districts.alt_name','districts.latitude','districts.longitude','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata');
+        $scol = array('districts.id','regencies.province_id','provinces.name AS province','districts.regency_id','regencies.name AS regency','districts.name','districts.alt_name','districts.latitude','districts.longitude','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata','districts.bumdes','districts.tbsekolah','districts.btsd','districts.sd','districts.smp','districts.sma','districts.profesi','districts.diploma','districts.sarjana','districts.magister','districts.doctoral','districts.btkerja','districts.asn','districts.pengajar','districts.wiraswasta','districts.petani','districts.nelayan','districts.pemukaagama','districts.pelajar','districts.nakes','districts.pensiun','districts.lainnya');
         // $order = [];
 
         $this->dt->select($scol);
@@ -128,7 +128,7 @@ class Tdistricts_model extends Model
 
     public function countAll()
     {
-        $scol = array('districts.id','regencies.province_id','provinces.name AS province','districts.regency_id','regencies.name AS regency','districts.name','districts.alt_name','districts.latitude','districts.longitude','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata');
+        $scol = array('districts.id','regencies.province_id','provinces.name AS province','districts.regency_id','regencies.name AS regency','districts.name','districts.alt_name','districts.latitude','districts.longitude','districts.totall','districts.totalp','districts.totala','districts.luaswil','districts.btsutara','districts.btsbarat','districts.btsselatan','districts.btstimur','districts.thndata','districts.bumdes','districts.tbsekolah','districts.btsd','districts.sd','districts.smp','districts.sma','districts.profesi','districts.diploma','districts.sarjana','districts.magister','districts.doctoral','districts.btkerja','districts.asn','districts.pengajar','districts.wiraswasta','districts.petani','districts.nelayan','districts.pemukaagama','districts.pelajar','districts.nakes','districts.pensiun','districts.lainnya');
         $this->dt->select($scol);
         $this->dt->join('regencies', 'regencies.id = districts.regency_id', 'left');;
         $this->dt->join('provinces', 'provinces.id = regencies.province_id', 'left');;

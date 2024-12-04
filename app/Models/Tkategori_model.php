@@ -50,12 +50,20 @@ class Tkategori_model extends Model
         }
     } 
 
+    public function getJoinNew()
+    {
+        $scol = array('tbkategori.kode', 'tbkategori.kategori');
+        $this->dt->select($scol);
+        $query = $this->dt->get();
+        return $query->getResult();
+    }
+
     public function getJoin()
     {
         $scol = array('MAX(tbkategori.kode) AS kode', 'MAX(tbkategori.kategori) AS kategori', 'COUNT(tbtempat.kd_kat) AS jumlah');
         $this->dt->select($scol);
         $this->dt->join('tbtempat', 'tbtempat.kd_kat = tbkategori.kode', 'left');;
-        $this->dt->groupby('tbtempat.kd_kat');
+        $this->dt->groupby('tbkategori.kode');
         $query = $this->dt->get();
         return $query->getResult();
     }

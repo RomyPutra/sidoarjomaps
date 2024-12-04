@@ -1,9 +1,9 @@
 <?php namespace App\Models;
 use CodeIgniter\Model;
  
-class Tregencies_model extends Model
+class Tregenciesdtl_model extends Model
 {
-    protected $table = 'regencies';
+    protected $table = 'regenciesdtl';
     protected $primaryKey = 'id';
 
     protected $dt; // Declare the property
@@ -49,47 +49,34 @@ class Tregencies_model extends Model
             return $this->db->Table($this->table)->delete([$this->primaryKey => $id]);
         }
     } 
-
+    
     public function getDatabyid($id)
     {
-        $scol = array('regencies.id','regencies.province_id','provinces.name AS province','regencies.name','regencies.alt_name','regencies.latitude','regencies.longitude','regencies.luaswil','regencies.btsutara','regencies.btsbarat','regencies.btsselatan','regencies.btstimur');
+        $scol = array('regenciesdtl.id','regenciesdtl.regency_id','regencies.name','regenciesdtl.thndata','regenciesdtl.usia','regenciesdtl.totall','regenciesdtl.totalp');
         $this->dt->select($scol);
-        $this->dt->join('provinces', 'provinces.id = regencies.province_id', 'left');;
-        $this->dt->where('regencies.id', $id);
-        $this->dt->orderBy('provinces.name', 'ASC');
+        $this->dt->join('regencies', 'regencies.id = regenciesdtl.regency_id', 'left');;
+        $this->dt->where('regenciesdtl.id', $id);
         $this->dt->orderBy('regencies.name', 'ASC');
-        $query = $this->dt->get();
-        return $query->getResult();
-    }
-
-    public function getPointMaps()
-    {
-        $scol = array('regencies.id','regencies.province_id','regencies.name','regencies.alt_name','regencies.name','regencies.latitude','regencies.longitude','regencies.luaswil','regencies.btsutara','regencies.btsbarat','regencies.btsselatan','regencies.btstimur');
-        $this->dt->select($scol);
-
+        $this->dt->orderBy('regenciesdtl.usia', 'ASC');
         $query = $this->dt->get();
         return $query->getResult();
     }
 
     private function getDatatablesQuery($postData=null)
     {
-        $scol = array('regencies.id','regencies.province_id','provinces.name AS province','regencies.name','regencies.alt_name','regencies.latitude','regencies.longitude','regencies.luaswil','regencies.btsutara','regencies.btsbarat','regencies.btsselatan','regencies.btstimur');
-        // $order = [];
-
+        $scol = array('regenciesdtl.id','regenciesdtl.regency_id','regencies.name','regenciesdtl.thndata','regenciesdtl.usia','regenciesdtl.totall','regenciesdtl.totalp');
+        $order = ['regenciesdtl.id' => 'DESC'];
         $this->dt->select($scol);
-        $this->dt->join('provinces', 'provinces.id = regencies.province_id', 'left');;
-
-        $search_value = $postData->getPost('search')['value'];
+        $this->dt->join('regencies', 'regencies.id = regenciesdtl.regency_id', 'left');;
 
         $i = 0;
         foreach ($scol as $item) {
-            $alias = strpos($item, ' AS ') ? explode(' AS ', $item)[0] : $item;
             if ($postData->getPost('search')['value']) {
                 if ($i === 0) {
                     $this->dt->groupStart();
-                    $this->dt->like($alias, $postData->getPost('search')['value']);
+                    $this->dt->like($item, $postData->getPost('search')['value']);
                 } else {
-                    $this->dt->orLike($alias, $postData->getPost('search')['value']);
+                    $this->dt->orLike($item, $postData->getPost('search')['value']);
                 }
                 if (count($scol) - 1 == $i)
                     $this->dt->groupEnd();
@@ -101,10 +88,7 @@ class Tregencies_model extends Model
             $this->dt->orderBy($scol[$postData->getPost('order')['0']['column']], $postData->getPost('order')['0']['dir']);
         } else if (isset($order)) {
             $this->dt->orderBy(key($order), $order[key($order)]);
-        } else {
-            $this->dt->orderBy('provinces.name', 'ASC');
-            $this->dt->orderBy('regencies.name', 'ASC');
-         }
+        }
     }
 
     public function getDatatables($postData=null)
@@ -122,11 +106,10 @@ class Tregencies_model extends Model
         return $this->dt->countAllResults();
     }
 
-    public function countAll()
+    public function countAll($tahun=null)
     {
-        $scol = array('regencies.id','regencies.province_id','provinces.name AS province','regencies.name','regencies.alt_name','regencies.latitude','regencies.longitude','regencies.luaswil','regencies.btsutara','regencies.btsbarat','regencies.btsselatan','regencies.btstimur');
-        $this->dt->select($scol);
-        $this->dt->join('provinces', 'provinces.id = regencies.province_id', 'left');;
-        return $this->dt->countAllResults();
+        $scol = array('regenciesdtl.id','regenciesdtl.regency_id','regencies.name','regenciesdtl.thndata','regenciesdtl.usia','regenciesdtl.totall','regenciesdtl.totalp');
+        $tbl_storage = $this->db->table($this->table)->select($scol)->join('regencies', 'regencies.id = regenciesdtl.regency_id', 'left');;
+        return $tbl_storage->countAllResults();
     }
 }

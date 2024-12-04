@@ -32,6 +32,7 @@
             margin-left: auto;
             margin-right: auto;
             display: block;
+            margin-bottom: 10px;
           }
         }
 

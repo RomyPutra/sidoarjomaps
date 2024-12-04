@@ -83,9 +83,9 @@ class Kategori extends BaseController
     {
         $validation = $this->validate([
             'kategori' => [
-                'rules' => 'max_length[25]',
+                'rules' => 'max_length[35]',
                 'errors' => [
-                    'max_length' => 'Kategori maksimal 25 karakter.',
+                    'max_length' => 'Kategori maksimal 35 karakter.',
                 ],
             ],
         ]);

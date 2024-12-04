@@ -19,13 +19,18 @@
   function initMap() {
 
     var LatLng = { lat: -7.4547306, lng: 112.6059371 };
-    var zoomed = 12;
+    var zoomed = 11;
 
     const map = new google.maps.Map(document.getElementById("map"), {
       // zoom: 12,
       // center: { lat: 34.84555, lng: -111.8035 },
       zoom: zoomed,
       center: LatLng,
+      scrollwheel: false,
+      navigationControl: false,
+      mapTypeControl: false,
+      scaleControl: false,
+      draggable: false,
     });
 
     map.data.setStyle(function(feature) {

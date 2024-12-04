@@ -24,25 +24,77 @@
                         <li class="nav-item">
                             <a href="<?php echo base_url('kategori');?>" class="nav-link">
                                 <i class="fa fa-book nav-icon"></i>
-                                <p>Kategori</p>
+                                <p>Master Kategori</p>
                             </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-cog nav-icon"></i>
+                                <p>Master Kabupaten<i class="fas fa-angle-left right"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('kabupaten');?>" class="nav-link">
+                                        <i class="fa fa-book nav-icon"></i>
+                                        <p>Kabupaten</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('kabupatendtl');?>" class="nav-link">
+                                        <i class="fa fa-book nav-icon"></i>
+                                        <p>Data Usia</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('kabupatenjob');?>" class="nav-link">
+                                        <i class="fa fa-book nav-icon"></i>
+                                        <p>Data Pekerjaan</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo base_url('kecamatan');?>" class="nav-link">
                                 <i class="fa fa-book nav-icon"></i>
-                                <p>Kecamatan</p>
+                                <p>Master Kecamatan</p>
                             </a>
                         </li>
+                        <!-- <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-cog nav-icon"></i>
+                                <p>Master Kecamatan<i class="fas fa-angle-left right"></i></p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('kecamatan');?>" class="nav-link">
+                                        <i class="fa fa-book nav-icon"></i>
+                                        <p>Kecamatan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('kecamatanedu');?>" class="nav-link">
+                                        <i class="fa fa-book nav-icon"></i>
+                                        <p>Data Pendidikan</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="<?php echo base_url('kecamatanjob');?>" class="nav-link">
+                                        <i class="fa fa-book nav-icon"></i>
+                                        <p>Data Pekerjaan</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li> -->
                         <li class="nav-item">
                             <a href="<?php echo base_url('kelurahan');?>" class="nav-link">
                                 <i class="fa fa-book nav-icon"></i>
-                                <p>Kelurahan</p>
+                                <p>Master Kelurahan</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?php echo base_url('obyek');?>" class="nav-link">
                                 <i class="fa fa-book nav-icon"></i>
-                                <p>Obyek</p>
+                                <p>Master Obyek</p>
                             </a>
                         </li>
                     </ul>

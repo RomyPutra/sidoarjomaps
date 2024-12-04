@@ -5,6 +5,9 @@ use Config\Services;
 use setasign\Fpdi\Fpdi;
 use App\Models\Tdistricts_model;
 use App\Models\Tlokasi_model;
+use App\Models\Tregencies_model;
+use App\Models\Tregenciesdtl_model;
+use App\Models\Tregenciesjobs_model;
 
 class Home extends BaseController
 {
@@ -12,16 +15,26 @@ class Home extends BaseController
     protected $validation;
     protected $main_model;
     protected $districts_model;
+    protected $regencies_model;
+    protected $regenciesdtl_model;
+    protected $regenciesjobs_model;
 
     public function __construct()
     {
         $this->validation = Services::validation();
         $this->main_model = new Tlokasi_model();
         $this->districts_model = new Tdistricts_model();
+        $this->regencies_model = new Tregencies_model();
+        $this->regenciesdtl_model = new Tregenciesdtl_model();
+        $this->regenciesjobs_model = new Tregenciesjobs_model();
 	}
     
     public function index()
     {
+        $data['kabupaten'] = $this->regencies_model->getData('3515');
+        $data['kabupatendtl'] = $this->regenciesdtl_model->getData('3515','regency_id');
+        $data['kabupatenjob'] = $this->regenciesjobs_model->getData('3515','regency_id');
+
         $data['subview'] = 'home/index';
         $data['jscript'] = 'home/js';
         return view('main_layout', $data);

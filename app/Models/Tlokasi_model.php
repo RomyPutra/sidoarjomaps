@@ -186,7 +186,7 @@ class Tlokasi_model extends Model
         $this->dt->join('tbkategori', 'tbkategori.kode = tbtempat.kd_kat', 'left');;
         $this->dt->join('villages', 'villages.id = tbtempat.kd_desa', 'left');;
         $this->dt->join('districts', 'districts.id = villages.district_id', 'left');;
-        $this->dt->where('tbtempat.nama', $obj);
+        $this->dt->like('tbtempat.nama', $obj);
 
         $query = $this->dt->get();
         return $query->getResult();
